@@ -4,6 +4,8 @@ def getEditDistance(str1, str2):
 
     d = [[0 for col in range(len(str2) + 1)] for row in range(len(str1) + 1)]
 
+    print(str1)
+    print(str2)
     for i in range(0, len(str1) + 1):
         d[i][0]= i
     
