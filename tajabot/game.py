@@ -8,6 +8,14 @@ import key
 import random
 from slackclient import SlackClient
 
+texts = [
+	"무궁화 꽃이 피었습니다.",
+	"이것도 너프해 보시지!",
+	"소프트웨어 마에스트로",
+	"난 너를 사랑해 이 세상은 너 뿐이야"
+]
+
+
 def actionStart(data):
 	sc.rtm_send_message(data['channel'], "Ready~")
 
@@ -29,21 +37,17 @@ def actionType(data):
 	distance = util.getEditDistance(data['text'], texts[textIndex])
 	length = max(len(data['text']), len(texts[textIndex]))
 	accur = (length - distance) / length * 100
-	edTime = time.time()
 
-	response = "accur : " + str(accur) + "% speed : " + str(edTime - stTime)
+	edTime = time.time()
+	speed = length / (edTime - stTime) * 60
+
+	response = "accur : " + str(accur) + "% speed : " + str(speed)
 	sc.rtm_send_message(data['channel'], response)
 
 	global textIndex
 	textIndex = -1
 print (sys.version)
 
-texts = [
-	"무궁화 꽃이 피었습니다.",
-	"이것도 너프해 보시지!",
-	"소프트웨어 마에스트로",
-	"난 너를 사랑해 이 세상은 너 뿐이야"
-]
 
 textIndex = -1
 stTime = 0
@@ -75,6 +79,6 @@ if sc.rtm_connect():
 					actionType(data)
 
 
-
+fdfsdf
 else:
 	print ("Connection Failed")

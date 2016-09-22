@@ -33,13 +33,13 @@ def workerThread(workerId, data):
     print('work job worker id : ' + str(workerId) + ' thread count : ' + str(processList[workerId]['threadCount']) + ' ' + data)
     time.sleep(10)
     
-#    decreaseThreadCount(workerId)
+    decreaseThreadCount(workerId)
     return
 
 def increaseThreadCount(workerId):
-#    lock.acquire()
+    lock.acquire()
     processList[workerId]['threadCount'] = processList[workerId]['threadCount'] + 1
-#    lock.release()
+    lock.release()
 
 def decreaseThreadCount(workerId):
     lock.acquire()
@@ -82,17 +82,6 @@ for i in range(cpu_num):
          'process'      : process,
          'threadCount'  : 0,
          'queue'        : queue}
-#    processList.append({})
-#    d = processList[len(processList)-1]
-#    d['workerId'] = i
-#    d['process'] = process
-#    d['threadCount'] = 0
-#    d['queue'] = queue
-#    d = {'workerId'     : i,
-#         'process'      : process,
-#         'threadCount'  : 0,
-#         'queue'        : queue}
-#    processList[len(processList)-1] = d
     process.start()
 
 # test code 
